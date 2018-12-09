@@ -11,7 +11,7 @@ header {
 
 main {
   background-color: #838787;
-  width: 80vw;
+  max-width: 80vw;
   margin: 100px auto;
   padding: 20px 50px;
 }
@@ -26,8 +26,22 @@ strong {
   font-weight: bold;
 }
 
-div {
+section {
   padding: 10px 0;
+}
+
+li {
+  padding-left: 20px;
+}
+
+aside {
+  float: right;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 a {
@@ -43,4 +57,27 @@ a.left {
 
 a.right {
   float: right;
+}
+
+button {
+  background-color: #34a5da;
+  border: 1px solid #191919;
+  border-radius: 15px;
+  margin: 0 5px;
+  padding: 5px 10px;
+  min-width: 50px;
+}
+
+nav > button {
+  background: none;
+  border: none;
+}
+
+input {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
 }
