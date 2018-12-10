@@ -1,14 +1,14 @@
 import React, { Component } from "react";
+import axios from "axios";
 import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudent";
 import Student from "./Student";
-import students from "./students";
 
 class StudentContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      students,
+      students: [],
       index: 0,
       edit: false,
       add: false
@@ -21,6 +21,12 @@ class StudentContainer extends Component {
     this.handleSave = this.handleSave.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  componentDidMount() {
+    axios
+      .get("https://dm20.now.sh/students")
+      .then(response => this.setState({ students: response.data }));
   }
 
   handlePrevious() {
@@ -40,12 +46,14 @@ class StudentContainer extends Component {
   }
 
   handleDelete() {
-    const students = [...this.state.students];
-    students.splice(this.state.index, 1);
-    this.setState({
-      students,
-      index: this.state.index === 0 ? 0 : this.state.index - 1
-    });
+    axios
+      .delete("https://dm20.now.sh/students/" + this.state.index)
+      .then(response => {
+        this.setState({
+          students: response.data,
+          index: this.state.index === 0 ? 0 : this.state.index - 1
+        });
+      });
   }
 
   handleEdit() {
@@ -56,9 +64,13 @@ class StudentContainer extends Component {
     this.setState({ add: true });
   }
   handleSave(student) {
-    const students = [...this.state.students];
-    students.push(student);
-    this.setState({ students, add: false, index: this.state.students.length });
+    axios.post("https://dm20.now.sh/students/", student).then(response => {
+      this.setState({
+        students: response.data,
+        add: false,
+        index: response.data.length - 1
+      });
+    });
   }
 
   handleCancel() {
@@ -66,12 +78,21 @@ class StudentContainer extends Component {
   }
 
   handleUpdate(student) {
-    const students = [...this.state.students];
-    students.splice(this.state.index, 1, student);
-    this.setState({ students, edit: false });
+    axios
+      .put(`https://dm20.now.sh/students/${this.state.index}`, student)
+      .then(response => {
+        this.setState({ students: response.data, edit: false });
+      });
   }
 
   render() {
+    if (!this.state.students.length) {
+      return (
+        <main>
+          <h1>Loading...</h1>
+        </main>
+      );
+    }
     return (
       <main>
         <aside>
