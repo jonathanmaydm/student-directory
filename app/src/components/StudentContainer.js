@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudent";
 import Student from "./Student";
-import students from "./students";
+import students from "../students";
 
 class StudentContainer extends Component {
   constructor(props) {
