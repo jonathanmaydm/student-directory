@@ -19,7 +19,8 @@ class StudentsList extends Component {
         style={{
           display: "flex",
           flexDirection: "row",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
+          width: "100vw"
         }}
       >
         {this.state.students.map((student, i) => (
