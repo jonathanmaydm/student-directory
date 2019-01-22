@@ -25,7 +25,7 @@ class StudentContainer extends Component {
 
   componentDidMount() {
     axios
-      .get("https://dm20.now.sh/students")
+      .get("https://wdl21.now.sh/api/students")
       .then(response => this.setState({ students: response.data }));
   }
 
@@ -47,7 +47,7 @@ class StudentContainer extends Component {
 
   handleDelete() {
     axios
-      .delete("https://dm20.now.sh/students/" + this.state.index)
+      .delete("https://wdl21.now.sh/api/students/" + this.state.index)
       .then(response => {
         this.setState({
           students: response.data,
@@ -64,7 +64,7 @@ class StudentContainer extends Component {
     this.setState({ add: true });
   }
   handleSave(student) {
-    axios.post("https://dm20.now.sh/students/", student).then(response => {
+    axios.post("https://wdl21.now.sh/api/students/", student).then(response => {
       this.setState({
         students: response.data,
         add: false,
@@ -79,7 +79,7 @@ class StudentContainer extends Component {
 
   handleUpdate(student) {
     axios
-      .put(`https://dm20.now.sh/students/${this.state.index}`, student)
+      .put(`https://wdl21.now.sh/api/students/${this.state.index}`, student)
       .then(response => {
         this.setState({ students: response.data, edit: false });
       });

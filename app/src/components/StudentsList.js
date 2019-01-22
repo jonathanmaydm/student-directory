@@ -10,7 +10,7 @@ class StudentsList extends Component {
   }
   componentDidMount() {
     axios
-      .get("https://dm20.now.sh/students")
+      .get("https://wdl21.now.sh/api/students")
       .then(response => this.setState({ students: response.data }));
   }
   render() {
